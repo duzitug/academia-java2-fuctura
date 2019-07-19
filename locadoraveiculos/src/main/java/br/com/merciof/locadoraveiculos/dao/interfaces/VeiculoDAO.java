@@ -5,6 +5,7 @@
  */
 package br.com.merciof.locadoraveiculos.dao.interfaces;
 
+import br.com.merciof.locadoraveiculos.entidades.Veiculo;
 import java.util.List;
 
 /**
@@ -13,10 +14,10 @@ import java.util.List;
  */
 public interface VeiculoDAO {
     
-    public void inserir(VeiculoDAO veiculo);
-    public ContaDAO selecionar();
-    public void remover(VeiculoDAO veiculo);
-    public void atualizar(VeiculoDAO veiculo);
-    public List<VeiculoDAO> listarVeiculo();   
+    public void inserir(Veiculo veiculo);
+    public Veiculo selecionar(String placa);
+    public void remover(Veiculo veiculo);
+    public void atualizar(Veiculo veiculo);
+    public List<Veiculo> listarVeiculo();   
     
 }
