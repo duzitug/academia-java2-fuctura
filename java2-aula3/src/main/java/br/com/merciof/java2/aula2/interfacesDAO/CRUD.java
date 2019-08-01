@@ -10,6 +10,7 @@ import java.util.List;
 /**
  *
  * @author JAVA
+ * @param <Entidade>
  */
 public interface CRUD<Entidade> {
     
