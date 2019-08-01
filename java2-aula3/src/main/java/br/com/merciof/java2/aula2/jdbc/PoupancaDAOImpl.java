@@ -10,6 +10,9 @@ import br.com.merciof.java2.aula2.model.ContaPoupanca;
 import br.com.merciof.java2.aula2.util.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,13 +38,29 @@ public class PoupancaDAOImpl implements CRUD<ContaPoupanca> {
         pt.setInt(3, e.getFK_ID_CLIENTE());
         pt.setDouble(4, e.getSaldo());
         pt.execute();
-        
-        throw new UnsupportedOperationException("Not supported yet.");
+  
     }
 
     @Override
     public List<ContaPoupanca> listarTodos() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        List<ContaPoupanca> listaConta = new ArrayList<>();
+        
+        String sql = "SELECT * FROM CONTA";
+        
+        Statement st = conn.createStatement();
+        ResultSet result = st.executeQuery(sql);
+        
+        while (result.next()) {            
+            ContaPoupanca conta = new ContaPoupanca(result.getInt("NUMERO"), result.getInt("AGENCIA"), result.getFloat("SALDO"), result.getInt("FK_ID_CLIENTE"));
+        
+            conta.setIdConta(result.getInt("ID_CONTA"));
+            
+            listaConta.add(conta);
+        }
+        
+        return listaConta;
+       
     }
 
     @Override
