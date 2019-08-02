@@ -65,17 +65,53 @@ public class PoupancaDAOImpl implements CRUD<ContaPoupanca> {
 
     @Override
     public ContaPoupanca listarPorId(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        ContaPoupanca  poupanca = null;
+        
+        String sql = "SELECT * FROM CONTA WHERE ID_CONTA =" + id;
+        
+        Statement st = conn.createStatement();
+        ResultSet result = st.executeQuery(sql);
+        
+        result.next();
+        
+        ContaPoupanca conta = new ContaPoupanca(result.getInt("NUMERO"), result.getInt("AGENCIA"), result.getFloat("SALDO"), result.getInt("FK_ID_CLIENTE"));
+        
+        conta.setIdConta(result.getInt("ID_CONTA"));
+        
+        return poupanca;
     }
 
     @Override
     public void atualizar(ContaPoupanca e) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+//        UPDATE Customers
+//        SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+//        WHERE CustomerID = 1;
+        
+        String sql = "UPDATE POUPANCA SET NUMERO = ?, AGENCIA = ?, SALDO = ? WHERE ID_CONTA = ?";
+        
+        PreparedStatement pst = this.conn.prepareStatement(sql);
+        
+        pst.setInt(1, e.getNumero());
+        pst.setInt(2, e.getAgencia());
+        pst.setFloat(3, e.getSaldo());
+        
+        pst.execute();
+        
     }
 
     @Override
     public void remover(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        String sql = "DELETE FROM CONTA WHERE ID_CONTA =" + id;
+        
+        Statement st = conn.createStatement();
+        
+        st.executeQuery(sql);
+        
+        
+        
     }
     
 }
