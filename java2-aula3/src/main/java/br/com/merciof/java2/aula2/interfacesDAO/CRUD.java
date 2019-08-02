@@ -19,7 +19,7 @@ public interface CRUD<Entidade> {
     public List<Entidade> listarTodos() throws Exception;
     
     public Entidade listarPorId(int id) throws Exception;
- 
+    
     public void atualizar(Entidade e) throws Exception;
     
     public void remover(int id) throws Exception;
